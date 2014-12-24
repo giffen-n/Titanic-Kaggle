@@ -11,3 +11,11 @@ test  <- read.csv("~/Titanic-Kaggle/test.csv")
 summary(train$Sex)
 prop.table(table(train$Sex, train$Survived))
 prop.table(table(train$Sex, train$Survived), 1)
+
+# Since Females survive more often, set females to survive in test set
+test$Survived <- 0
+test$Survived[test$Sex == 'female'] <- 1
+
+# Create submission dataframe and output to file
+submit <- data.frame(PassengerId = test$PassengerId, Survived = test$Survived)
+write.csv(submit, file = "gendermodel.csv", row.names = FALSE)
