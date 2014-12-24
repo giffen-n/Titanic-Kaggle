@@ -27,3 +27,7 @@ summary(train$Age)
 train$Child  <- 0
 train$Child[train$Age < 18] <- 1
 
+# Create survival table based on Child and Sex
+aggregate(Survived ~ Child + Sex, data=train, FUN=sum)
+aggregate(Survived ~ Child + Sex, data=train, FUN=length)
+aggregate(Survived ~ Child + Sex, data=train, FUN=function(x) {sum(x)/length(x)})
