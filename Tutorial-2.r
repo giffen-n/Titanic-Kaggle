@@ -19,3 +19,11 @@ test$Survived[test$Sex == 'female'] <- 1
 # Create submission dataframe and output to file
 submit <- data.frame(PassengerId = test$PassengerId, Survived = test$Survived)
 write.csv(submit, file = "gendermodel.csv", row.names = FALSE)
+
+# Summary of passenger ages
+summary(train$Age)
+
+# Create Chile column identifying children as those under age 18
+train$Child  <- 0
+train$Child[train$Age < 18] <- 1
+
